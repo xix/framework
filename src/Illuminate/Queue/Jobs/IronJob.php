@@ -15,7 +15,7 @@ class IronJob extends Job {
 	/**
 	 * The IronMQ message instance.
 	 *
-	 * @var object
+	 * @var array
 	 */
 	protected $job;
 
@@ -32,6 +32,7 @@ class IronJob extends Job {
 	 * @param  \Illuminate\Container\Container  $container
 	 * @param  \Illuminate\Queue\IronQueue  $iron
 	 * @param  object  $job
+	 * @param  string  $queue
 	 * @param  bool    $pushed
 	 * @return void
 	 */
@@ -77,7 +78,7 @@ class IronJob extends Job {
 
 		if (isset($this->job->pushed)) return;
 
-		$this->iron->deleteMessage($this->getQueue(), $this->job->id);
+		$this->iron->deleteMessage($this->getQueue(), $this->job->id, $this->job->reservation_id);
 	}
 
 	/**
