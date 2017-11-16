@@ -302,7 +302,7 @@ class Encrypter {
 	 */
 	protected function updateBlockSize()
 	{
-		$this->block = mcrypt_get_iv_size($this->cipher, $this->mode);
+		$this->block = @mcrypt_get_iv_size($this->cipher, $this->mode);
 	}
 
 }
